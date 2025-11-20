@@ -1,22 +1,21 @@
 import numpy as np
 import os
 
-params = {
-   'axes.labelsize': 20,
-   'font.size': 20,
-   'legend.fontsize': 12,
-   'xtick.labelsize': 12,
-   'ytick.labelsize': 12,
-   'figure.figsize': [10,10]
-   } 
-plt.rcParams.update(params)
-
 #Plot figure of vertices
 showfig = False
 
 #Only import matplotlib if showing figures
 if showfig:
     import matplotlib.pyplot as plt
+    params = {
+       'axes.labelsize': 20,
+       'font.size': 20,
+       'legend.fontsize': 12,
+       'xtick.labelsize': 12,
+       'ytick.labelsize': 12,
+       'figure.figsize': [10,10]
+       } 
+    plt.rcParams.update(params)
 
 # Parameters
 r0 = 0.1      # starting radius (mm) i.e. central cutout rad
