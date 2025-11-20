@@ -20,16 +20,6 @@ internalField   uniform 1;
 
 boundaryField
 {
-    symmetryX
-    {
-        type            symmetryPlane;
-    }
-	
-	symmetryY
-	{
-		type			symmetryPlane;
-	}
-
 	innerWall
 	{
 		type	zeroGradient;

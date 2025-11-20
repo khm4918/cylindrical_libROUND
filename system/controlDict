@@ -23,11 +23,11 @@ startTime       0;
 
 stopAt          endTime;
 
-endTime         5.0e-6;
+endTime         1.25e-5;
 
 writeControl    adjustableRunTime;
 
-writeInterval   5e-7;
+writeInterval   176e-9;
 
 writeFormat     binary;
 
@@ -46,6 +46,11 @@ adjustTimeStep  yes;
 deltaT          1e-9;
 
 maxCo           0.5;
+
+libs
+(
+	"libROUNDSchemes.so"
+);
 
 // ************************************************************************* //
 
