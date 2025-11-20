@@ -1,5 +1,4 @@
 import numpy as np
-import matplotlib.pyplot as plt
 import os
 
 params = {
@@ -14,6 +13,10 @@ plt.rcParams.update(params)
 
 #Plot figure of vertices
 showfig = False
+
+#Only import matplotlib if showing figures
+if showfig:
+    import matplotlib.pyplot as plt
 
 # Parameters
 r0 = 0.5        # starting radius (mm)
