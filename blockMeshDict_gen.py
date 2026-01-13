@@ -18,9 +18,9 @@ if showfig:
     plt.rcParams.update(params)
 
 # Parameters
-r0 = 0.1        # starting radius (mm)
+r0 = 0.3        # starting radius (mm)
 r_max = 18      # max radius (mm)
-theta_min = 165  # starting theta (deg)
+theta_min = 0  # starting theta (deg)
 theta_deg = 30  # wedge angle in degrees
 n_radial = 1000  # radial cells
 n_theta = 30    # angular divisions
