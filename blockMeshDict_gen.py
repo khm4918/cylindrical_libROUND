@@ -18,9 +18,10 @@ if showfig:
     plt.rcParams.update(params)
 
 # Parameters
-r0 = 0.5        # starting radius (mm)
-r_max = 18     # max radius (mm)
-theta_deg = 90  # wedge angle in degrees
+r0 = 0.1        # starting radius (mm)
+r_max = 18      # max radius (mm)
+theta_min = 165  # starting theta (deg)
+theta_deg = 30  # wedge angle in degrees
 n_radial = 1000  # radial cells
 n_theta = 30    # angular divisions
 n_axial = 1     # axial divisions
@@ -29,6 +30,7 @@ z_max = 1.0
 
 # Derived parameters
 theta_rad = np.deg2rad(theta_deg)
+theta_min = np.deg2rad(theta_min)
 delta_theta = theta_rad / n_theta
 delta_z = (z_max - z_min) / n_axial
 
@@ -47,7 +49,7 @@ for z_i in range(n_axial + 1):
     z = z_min + z_i * delta_z
     for i_theta in range(n_theta + 1):
         theta = i_theta * delta_theta
-        cos_t, sin_t = np.cos(theta), np.sin(theta)
+        cos_t, sin_t = np.cos(theta+theta_min), np.sin(theta+theta_min)
         for r in radii:
             x = r * cos_t
             y = r * sin_t
@@ -107,7 +109,7 @@ with open("system/blockMeshDict", "w") as f:
     f.write("boundary\n(\n")
     
     # symmetryPlane along theta = 0
-    f.write("    symmetryX\n    {\n        type symmetryPlane;\n        faces\n        (\n")
+    f.write("    symmetryX\n    {\n        type symmetry;\n        faces\n        (\n")
     for i_r in range(n_r):
         v0 = idx(0, 0, i_r)
         v1 = idx(0, 0, i_r+1)
@@ -117,7 +119,7 @@ with open("system/blockMeshDict", "w") as f:
     f.write("        );\n    }\n")
     
     # symmetryPlane along theta = 90 deg
-    f.write("    symmetryY\n    {\n        type symmetryPlane;\n        faces\n        (\n")
+    f.write("    symmetryY\n    {\n        type symmetry;\n        faces\n        (\n")
     for i_r in range(n_r):
         v0 = idx(0, n_theta, i_r)
         v1 = idx(0, n_theta, i_r+1)
