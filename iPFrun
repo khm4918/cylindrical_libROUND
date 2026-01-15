@@ -8,7 +8,7 @@ export IPFOAM_DIR="$HOME/OpenFOAM/initialProfileFoam/"
 
 # replace 0 folder with base fields
 cd $IPFOAM_DIR
-cp -r base_fields_sqmesh360 0
+cp -r base_fields_general 0
 
 # copy constant and system folders to iPF
 cd $SCRIPT_DIR
@@ -18,7 +18,7 @@ cp -r system $IPFOAM_DIR/system
 # remove old createFields file and replace with case template
 cd $IPFOAM_DIR
 rm createFields.H
-cp History/Validation/cyl_rmi/lambda_study/aug2025_n12_shot12_friedlanderGPT_setP.H createFields.H
+cp History/Validation/cyl_rmi/cav_supp/s031225_KAS3_sinusoid_n12.H createFields.H
 
 # open iPF and generate fields
 cd $IPFOAM_DIR

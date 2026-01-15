@@ -18,12 +18,12 @@ if showfig:
     plt.rcParams.update(params)
 
 # Parameters
-r0 = 0.3        # starting radius (mm)
+r0 = 0.1        # starting radius (mm)
 r_max = 18      # max radius (mm)
-theta_min = 0  # starting theta (deg)
-theta_deg = 30  # wedge angle in degrees
-n_radial = 1000  # radial cells
-n_theta = 30    # angular divisions
+theta_min = 150  # starting theta (deg)
+theta_deg = 60  # wedge angle in degrees
+n_radial = 10000  # radial cells (in excess)
+n_theta = 60    # angular divisions
 n_axial = 1     # axial divisions
 z_min = 0.0
 z_max = 1.0
@@ -67,8 +67,8 @@ if showfig == True:
     y = np.array(y)
     
     plt.plot(x,y,'x')
-    plt.xlim(-1, 20)
-    plt.ylim(-1, 20)
+    plt.xlim(-20, 20)
+    plt.ylim(-20, 20)
     plt.show()
 
 # Index helper
@@ -77,6 +77,8 @@ def idx(z, t, r):
 
 # Write blockMeshDict
 os.makedirs("system", exist_ok=True)
+cell_count = 0  # counter
+
 with open("system/blockMeshDict", "w") as f:
     f.write("FoamFile\n{\n    version 2.0;\n    format ascii;\n    class dictionary;\n    object blockMeshDict;\n}\n\n")
     f.write("convertToMeters 0.001;\n\n")
@@ -101,6 +103,7 @@ with open("system/blockMeshDict", "w") as f:
             # ✅ Corrected vertex order to prevent inside-out error
             f.write(f"    hex ({v0} {v3} {v2} {v1} {v4} {v7} {v6} {v5}) "
                     f"({1} {1} {n_axial}) simpleGrading (1 1 1)\n")
+            cell_count += 1
     f.write(");\n\n")
 
     f.write("edges\n(\n);\n\n")
@@ -173,3 +176,4 @@ with open("system/blockMeshDict", "w") as f:
     f.write("mergePatchPairs\n(\n);\n")
 
 print("✅ blockMeshDict written to system/blockMeshDict")
+print(f"📦 Number of cells generated: {cell_count * n_axial:,}")

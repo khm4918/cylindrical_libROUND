@@ -21,6 +21,16 @@ internalField   uniform 300;
 
 boundaryField
 {
+    symmetryX
+    {
+        type            symmetry;
+    }
+	
+	symmetryY
+	{
+		type			symmetry;
+	}
+
 	innerWall
 	{
 		type	zeroGradient;
